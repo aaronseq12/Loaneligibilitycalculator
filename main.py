@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 import pymysql.connections
 from flask import Flask, render_template, request, redirect, session
 import os
@@ -7,17 +7,14 @@ import hashlib
 from sklearn.linear_model import _logistic as logistic
 
 
-# creating the Flask class object
 app = Flask(__name__)
 model = pickle.load(open('./Model/loanpred1_tree.pkl', 'rb'))
 app.secret_key = os.urandom(24)
-# connection with database
+
 connection = pymysql.connect(host="localhost", user="root", password="", database="loan_prediction_system")
 cursor = connection.cursor()
 
 
-# decorator defines
-## Admin Code Part is Here
 @app.route('/admin')
 def admin():
     query = "select * from prediction;"
@@ -54,7 +51,6 @@ def adminval():
     else:
         return redirect('/')
 
-## User Code Start From Here
 @app.route('/home')
 def home():
     if 'userid' in session:
@@ -130,7 +126,7 @@ def adduser():
 
     cursor.execute(val_sql, val)
     USER_DATA = cursor.fetchall()
-    # USER_DATA = list(USER_DATA[0])
+ 
     if len(USER_DATA) > 0:
         return render_template('sing.html', status=1)
     else:
