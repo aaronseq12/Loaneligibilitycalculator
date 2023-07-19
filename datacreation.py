@@ -5,7 +5,7 @@ def createdatabase():
     currsor = connection.cursor()
     currsor.execute("create database loan_prediction_system")
 
-#createdatabase()
+#createdatabase()inthe system
 
 
 def createtablesingin():
