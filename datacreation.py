@@ -5,7 +5,7 @@ def createdatabase():
     currsor = connection.cursor()
     currsor.execute("create database loan_prediction_system")
 
-#createdatabase()
+#createdatabase() to create the database 
 
 def createtablesingin():
     connection = pymysql.connect(host="localhost", user="root", password="",database="loan_prediction_system")
