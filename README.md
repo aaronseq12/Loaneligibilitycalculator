@@ -1,10 +1,6 @@
 #  **Bank Loan Prediction System using Flask**
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)                 
-   
-[![Flask](https://img.shields.io/badge/flask-v1.1.1-blue)](https://flask.palletsprojects.com/en/2.0.x/)   
-
-
 
 ## **Loan Project**
 The loan is a core part of every business today. This system will help the bank identify the royal customer for their bank and bank to contribute more to our GDP.
@@ -33,13 +29,3 @@ Credit_History | credit history meets guidelines
 Property_Area | Urban/ Semi Urban/ Rural
 Loan_Status | Loan approved (Y/N)
 
-
-## ScreenShot Of Application:
-
-![App Screenshot](https://github.com/kz2511/Loan-Predction-System/blob/master/SS%20of%20Application/singin%20%20.png)
-
-
-![App Screenshot](https://github.com/kz2511/Loan-Predction-System/blob/master/SS%20of%20Application/predction%20screen%20.png)
-
-
-![App Screenshot](https://github.com/kz2511/Loan-Predction-System/blob/master/SS%20of%20Application/adminlogin%20.png)
