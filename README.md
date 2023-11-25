@@ -7,11 +7,11 @@
 
 
 ## **Loan Project**
-The loan is a core part of every business today. This system will help the bank identify the royal customer for their bank and bank to contribute more to our GDP.......
+The loan is a core part of every business today. This system will help the bank identify the royal customer for their bank and bank to contribute more to our GDP.
 
 ## **Problem Statement**
 
-Commercial Bank of Qatar deals in all home, personal, vehicle loans. They have presence across all urban, semi urban and rural areas. Customer first apply for home loan after that company validates the customer eligibility for loan.
+A Bank deals in all home, personal, vehicle loans. They have presence across all urban, semi urban and rural areas. Customer first apply for home loan after that company validates the customer eligibility for loan.
 
 The company wants to automate the loan eligibility process (real time) based on customer detail provided while filling online application form. These details are Gender, Marital Status, Education, Number of Dependents, Income, Loan Amount, Credit History and others. To automate this process, they have given a problem to identify the customers segments, those are eligible for loan amount so that they can specifically target these customers. Here they have provided a partial data set.
 
