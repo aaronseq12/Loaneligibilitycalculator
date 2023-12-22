@@ -1,5 +1,5 @@
 import pymysql
-
+ 
 def createdatabase():
     connection = pymysql.connect(host="localhost", user="root", password="")
     currsor = connection.cursor()
