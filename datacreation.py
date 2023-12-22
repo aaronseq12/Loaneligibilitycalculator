@@ -1,4 +1,4 @@
-import pymysql 
+import pymysql
 
 def createdatabase():
     connection = pymysql.connect(host="localhost", user="root", password="")
