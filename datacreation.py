@@ -1,6 +1,6 @@
 import pymysql
  
-def createdatabase():
+def createdatabase(): 
     connection = pymysql.connect(host="localhost", user="root", password="")
     currsor = connection.cursor()
     currsor.execute("create database loan_prediction_system")
