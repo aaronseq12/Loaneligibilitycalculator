@@ -1,4 +1,4 @@
-#  **Simple Bank Loan Prediction System**
+#  **Simple Bank Credit score Prediction System**
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)                 
 
