@@ -1,59 +1,85 @@
+# datacreation.py
+# This script sets up the necessary database and tables for the loan prediction application.
 import pymysql
- 
-def createdatabase(): 
-    connection = pymysql.connect(host="localhost", user="root", password="")
-    currsor = connection.cursor()
-    currsor.execute("create database loan_prediction_system")
 
-#createdatabase() to create the database in the system
+def create_database():
+    """Creates the database if it doesn't already exist."""
+    try:
+        connection = pymysql.connect(host="localhost", user="root", password="")
+        cursor = connection.cursor()
+        cursor.execute("CREATE DATABASE IF NOT EXISTS loan_prediction_system")
+        print("Database 'loan_prediction_system' created or already exists.")
+        connection.close()
+    except pymysql.err.OperationalError as e:
+        print(f"Error connecting to MySQL: {e}")
+        print("Please ensure your MySQL server (like XAMPP) is running.")
 
-def createtablesingin():
-    connection = pymysql.connect(host="localhost", user="root", password="",database="loan_prediction_system")
-    currsor = connection.cursor()
-    currsor.execute("""CREATE TABLE IF NOT EXISTS USER_DATA ( 
-        USER_ID varchar(100) NOT NULL  PRIMARY KEY,
-        EMAILADDRESS varchar(100) NOT NULL,
-        MOBILE_NUMBER varchar(100) NOT NULL,
-        FULL_NAME varchar(100) NOT NULL,
-        PASSWORD varchar(50) NOT NULL
+def create_tables():
+    """Creates the tables for user data, admin data, and predictions."""
+    try:
+        connection = pymysql.connect(host="localhost", user="root", password="", database="loan_prediction_system")
+        cursor = connection.cursor()
+
+        # Table for user sign-in information
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS USER_DATA ( 
+                USER_ID VARCHAR(100) NOT NULL PRIMARY KEY,
+                EMAILADDRESS VARCHAR(100) NOT NULL,
+                MOBILE_NUMBER VARCHAR(100) NOT NULL,
+                FULL_NAME VARCHAR(100) NOT NULL,
+                PASSWORD VARCHAR(50) NOT NULL
+            );
+        """)
+        print("Table 'USER_DATA' created or already exists.")
+
+        # Table for storing prediction results with new features
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS prediction (
+                ID INT AUTO_INCREMENT PRIMARY KEY,
+                First_Name VARCHAR(50),
+                Last_Name VARCHAR(50),
+                Gender INT,
+                Martial_Status INT,
+                Number_of_dependents INT,
+                Education INT,
+                Employment_status INT,
+                Property_Area INT,
+                Credit_History FLOAT,
+                CIBIL_Score INT,
+                Income FLOAT,
+                Co_Applicant_Income FLOAT,
+                Loan_Amount FLOAT,
+                Loan_Duration FLOAT,
+                prediction VARCHAR(20),
+                Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+        print("Table 'prediction' created or already exists.")
         
-    );
-       """)
-createtablesingin()
+        # Table for admin login
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS admin_data (
+                ADMIN_ID VARCHAR(50) NOT NULL PRIMARY KEY,
+                PASSWORD VARCHAR(50) NOT NULL
+            );
+        """)
+        print("Table 'admin_data' created or already exists.")
 
-def createtablepredction():
-    connection = pymysql.connect(host="localhost", user="root", password="",database="loan_prediction_system")
-    currsor = connection.cursor()
-    currsor.execute("""CREATE TABLE IF NOT EXISTS prediction( 
-        First_Name varchar(100) NOT NULL,
-        Last_Name varchar(100) NOT NULL,
-        Bank_Account_last_three_digit varchar(100) NOT NULL,
-        Gender varchar(100) NOT NULL,
-        Martial_Status varchar(20) NOT NULL,
-        Number_of_dependents varchar(20) NOT NULL,
-        Education varchar(20) NOT NULL,
-        Employment_status varchar(20) NOT NULL,
-        Property_Area varchar(20) NOT NULL,
-        Credit_Score varchar(20) NOT NULL,
-        Income varchar(20) NOT NULL,
-        Co_Applicant_Income varchar(20) NOT NULL,
-        Loan_Amount varchar(20) NOT NULL,
-        Loan_Duration varchar(20) NOT NULL  ,
-        prediction varchar(20) NOT NULL
-    );
-       """)
-#createtablepredction()
+        # Insert a default admin if one doesn't exist
+        cursor.execute("SELECT * FROM admin_data WHERE ADMIN_ID = 'admin'")
+        if not cursor.fetchone():
+            cursor.execute("INSERT INTO admin_data (ADMIN_ID, PASSWORD) VALUES ('admin', 'admin123')")
+            connection.commit()
+            print("Default admin user ('admin'/'admin123') created.")
 
+        connection.close()
+    except pymysql.err.OperationalError as e:
+        print(f"Error connecting to database 'loan_prediction_system': {e}")
+        print("Please run create_database() first.")
 
-def createadmindata():
-    connection = pymysql.connect(host="localhost", user="root", password="", database="loan_prediction_system")
-    currsor = connection.cursor()
-    currsor.execute("""CREATE TABLE IF NOT EXISTS Admin_DATA ( 
-           ADMIN_ID varchar(100) NOT NULL,
-           MOBILE_NUMBER varchar(100) NOT NULL,
-           PASSWORD varchar(50) NOT NULL
-       );
-          """)
-#createadmindata()
-
-
+if __name__ == '__main__':
+    print("Setting up the database...")
+    create_database()
+    create_tables()
+    print("\nDatabase setup complete!")
+    print("You can now run 'main.py' to start the application.")
